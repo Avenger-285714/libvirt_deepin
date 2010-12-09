@@ -20,19 +20,19 @@ sysconfdir="@sysconfdir@"
 localstatedir="@localstatedir@"
 initconfdir="@initconfdir@"
 
-# Source function library.
-test ! -r "$sysconfdir"/rc.d/init.d/functions ||
-    . "$sysconfdir"/rc.d/init.d/functions
-
 # Source gettext library.
 # Make sure this file is recognized as having translations: _("dummy")
 . "@bindir@"/gettext.sh
 
+# Make sure calls to this script get redirected to systemctl when
+# using systemd
+. /lib/lsb/init-functions
+
 export TEXTDOMAIN="@PACKAGE@" TEXTDOMAINDIR="@localedir@"
 
 URIS="default"
-ON_BOOT="start"
-ON_SHUTDOWN="suspend"
+ON_BOOT="ignore"
+ON_SHUTDOWN="shutdown"
 SHUTDOWN_TIMEOUT=300
 PARALLEL_SHUTDOWN=0
 START_DELAY=0
@@ -44,7 +44,7 @@ test -f "$initconfdir"/libvirt-guests &&
     . "$initconfdir"/libvirt-guests
 
 LISTFILE="$localstatedir"/lib/libvirt/libvirt-guests
-VAR_SUBSYS_LIBVIRT_GUESTS="$localstatedir"/lock/subsys/libvirt-guests
+VAR_SUBSYS_LIBVIRT_GUESTS="$localstatedir"/lock/libvirt-guests
 
 RETVAL=0
 
@@ -585,8 +585,7 @@ gueststatus() {
 
 # rh_status
 # Display current status: whether saved state exists, and whether start
-# has been executed.  We cannot use status() from the functions library,
-# since there is no external daemon process matching this init script.
+# has been executed.
 rh_status() {
     if [ -f "$LISTFILE" ]; then
         gettext "stopped, with saved guests"; echo

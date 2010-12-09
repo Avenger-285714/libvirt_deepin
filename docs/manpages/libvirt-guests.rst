@@ -51,7 +51,7 @@ The following variables are supported:
   URIs to check for running guests. Example:
   ``URIS='default xen:///system xen+tcp://host/system lxc:///system'``
 
-- ON_BOOT=start
+- ON_BOOT=ignore
 
   Action taken on host boot
 
@@ -70,7 +70,7 @@ The following variables are supported:
   Number of seconds to wait between each guest start. Set to 0 to allow parallel
   startup.
 
-- ON_SHUTDOWN=suspend
+- ON_SHUTDOWN=shutdown
 
   Action taken on host shutdown
 
