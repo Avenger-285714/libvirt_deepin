@@ -279,4 +279,11 @@
 
 @BEGIN_APPARMOR_3@
   include if exists <abstractions/libvirt-qemu.d>
+
+  ### DEPRECATED ###
+  # Debian-specific override file
+  # Please use <abstractions/libvirt-qemu.d/...> instead
+  # Support for this override will be removed in a future release
+  ### DEPRECATED ###
+  include if exists <local/abstractions/libvirt-qemu>
 @END_APPARMOR_3@

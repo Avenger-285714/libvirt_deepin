@@ -119,4 +119,11 @@
 
 @BEGIN_APPARMOR_3@
   include if exists <abstractions/libvirt-lxc.d>
+
+  ### DEPRECATED ###
+  # Debian-specific override file
+  # Please use <abstractions/libvirt-lxc.d/...> instead
+  # Support for this override will be removed in a future release
+  ### DEPRECATED ###
+  include if exists <local/abstractions/libvirt-lxc>
 @END_APPARMOR_3@
