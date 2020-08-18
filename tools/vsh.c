@@ -2557,7 +2557,7 @@ vshEditWriteToTempFile(vshControl *ctl, const char *doc)
 
 /* Hard-code default editor used as a fallback if not configured by
  * VISUAL or EDITOR environment variables. */
-#define DEFAULT_EDITOR "vi"
+#define DEFAULT_EDITOR "sensible-editor"
 
 int
 vshEditFile(vshControl *ctl, const char *filename)
