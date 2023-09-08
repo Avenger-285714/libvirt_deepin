@@ -2889,6 +2889,7 @@ struct _virDomainSEVDef {
     char *dh_cert;
     char *session;
     unsigned int policy;
+    char *user_id;
 };
 
 
