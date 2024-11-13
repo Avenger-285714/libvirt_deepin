@@ -2890,6 +2890,8 @@ struct _virDomainSEVDef {
     char *session;
     unsigned int policy;
     char *user_id;
+    char *secret_header;
+    char *secret;
 };
 
 

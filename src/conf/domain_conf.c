@@ -3859,6 +3859,8 @@ virDomainSecDefFree(virDomainSecDef *def)
         g_free(def->data.sev.dh_cert);
         g_free(def->data.sev.session);
         g_free(def->data.sev.user_id);
+        g_free(def->data.sev.secret_header);
+        g_free(def->data.sev.secret);
         break;
     case VIR_DOMAIN_LAUNCH_SECURITY_SEV_SNP:
         g_free(def->data.sev_snp.guest_visible_workarounds);
@@ -13747,6 +13749,8 @@ virDomainSEVDefParseXML(virDomainSEVDef *def,
     def->dh_cert = virXPathString("string(./dhCert)", ctxt);
     def->session = virXPathString("string(./session)", ctxt);
     def->user_id = virXPathString("string(./userid)", ctxt);
+    def->secret_header = virXPathString("string(./secretHeader)", ctxt);
+    def->secret = virXPathString("string(./secret)", ctxt);
 
     return 0;
 }
@@ -26911,6 +26915,10 @@ virDomainSEVDefFormat(virBuffer *attrBuf,
 
     if (def->user_id)
         virBufferEscapeString(childBuf, "<userid>%s</userid>\n", def->user_id);
+    if (def->secret_header)
+        virBufferEscapeString(childBuf, "<secretHeader>%s</secretHeader>\n", def->secret_header);
+    if (def->secret)
+        virBufferEscapeString(childBuf, "<secret>%s</secret>\n", def->secret);
 }
 
 
