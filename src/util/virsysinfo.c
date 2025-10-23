@@ -1268,7 +1268,8 @@ virSysinfoRead(void)
      defined(__amd64__) || \
      defined(__riscv__) || \
      defined(__mips__) || \
-     defined(__loongarch__))
+     defined(__loongarch__) || \
+     defined(__sw_64__))
     return virSysinfoReadDMI();
 #else /* WIN32 || not supported arch */
     /*

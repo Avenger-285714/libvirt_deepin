@@ -1604,7 +1604,7 @@ elif get_option('driver_lxc').enabled()
   error('linux and remote_driver are required for LXC')
 endif
 
-if not get_option('driver_ch').disabled() and host_machine.system() == 'linux' and (host_machine.cpu_family() == 'x86_64' or host_machine.cpu_family() == 'aarch64')
+if not get_option('driver_ch').disabled() and host_machine.system() == 'linux' and (host_machine.cpu_family() == 'x86_64' or host_machine.cpu_family() == 'aarch64' or host_machine.cpu_family() == 'sw_64')
   use_ch = true
 
   if not conf.has('WITH_LIBVIRTD')

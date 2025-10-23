@@ -471,6 +471,7 @@
       <value>x86_64</value>
       <value>xtensa</value>
       <value>xtensaeb</value>
+      <value>sw_64</value>
     </choice>
   </define>
 

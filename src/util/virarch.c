@@ -84,6 +84,8 @@ static const struct virArchData {
     { "x86_64",       64, VIR_ARCH_LITTLE_ENDIAN },
     { "xtensa",       32, VIR_ARCH_LITTLE_ENDIAN },
     { "xtensaeb",     32, VIR_ARCH_BIG_ENDIAN },
+
+    { "sw_64",        64, VIR_ARCH_LITTLE_ENDIAN },
 };
 
 G_STATIC_ASSERT(G_N_ELEMENTS(virArchData) == VIR_ARCH_LAST);
@@ -197,6 +199,8 @@ virArch virArchFromHost(void)
         return VIR_ARCH_ARMV7L;
     case PROCESSOR_ARCHITECTURE_ARM64:
         return VIR_ARCH_AARCH64;
+    case PROCESSOR_ARCHITECTURE_SW64:
+        return VIR_ARCH_SW_64;
     default:
         VIR_WARN("Unknown host arch '%d', report to devel@lists.libvirt.org",
                  info.wProcessorArchitecture);
@@ -225,7 +229,9 @@ virArch virArchFromHost(void)
         arch = VIR_ARCH_AARCH64;
     } else if (STREQ(ut.machine, "loongarch64")) {
         arch = VIR_ARCH_LOONGARCH64;
-    } else {
+    } else if (STREQ(ut.machine, "sw_64")) {
+        arch = VIR_ARCH_SW_64;
+    }else {
         /* Otherwise assume the canonical name */
         if ((arch = virArchFromString(ut.machine)) == VIR_ARCH_NONE) {
             VIR_WARN("Unknown host arch %s, report to devel@lists.libvirt.org",

@@ -13005,6 +13005,9 @@ virDomainVideoDefaultRAM(const virDomainDef *def,
         /* Original Xen PVFB hardcoded to 4 MB */
         return 4 * 1024;
 
+#if defined(__sw_64__)
+    case VIR_DOMAIN_VIDEO_TYPE_VIRTIO:
+#endif
     case VIR_DOMAIN_VIDEO_TYPE_QXL:
         /* QEMU use 64M as the minimal video memory for qxl device */
         return 64 * 1024;
@@ -13012,8 +13015,10 @@ virDomainVideoDefaultRAM(const virDomainDef *def,
     case VIR_DOMAIN_VIDEO_TYPE_DEFAULT:
     case VIR_DOMAIN_VIDEO_TYPE_VBOX:
     case VIR_DOMAIN_VIDEO_TYPE_PARALLELS:
-    case VIR_DOMAIN_VIDEO_TYPE_VIRTIO:
     case VIR_DOMAIN_VIDEO_TYPE_GOP:
+#if !defined(__sw_64__)
+    case VIR_DOMAIN_VIDEO_TYPE_VIRTIO:
+#endif
     case VIR_DOMAIN_VIDEO_TYPE_NONE:
     case VIR_DOMAIN_VIDEO_TYPE_RAMFB:
     case VIR_DOMAIN_VIDEO_TYPE_LAST:

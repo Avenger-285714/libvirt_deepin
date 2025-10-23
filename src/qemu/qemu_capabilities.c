@@ -829,6 +829,8 @@ virArch virQEMUCapsArchFromString(const char *arch)
         return VIR_ARCH_ARMV7L;
     if (STREQ(arch, "or32"))
         return VIR_ARCH_OR32;
+    if (STREQ(arch, "sw64"))
+        return VIR_ARCH_SW_64;
 
     return virArchFromString(arch);
 }
@@ -842,6 +844,8 @@ const char *virQEMUCapsArchToString(virArch arch)
         return "arm";
     if (arch == VIR_ARCH_OR32)
         return "or32";
+    if (arch == VIR_ARCH_SW_64)
+        return "sw64";
 
     return virArchToString(arch);
 }
@@ -2746,6 +2750,9 @@ static const char *preferredMachines[] =
     "pc", /* VIR_ARCH_X86_64 */
     "sim", /* VIR_ARCH_XTENSA */
     "sim", /* VIR_ARCH_XTENSAEB */
+
+    "core3", /* VIR_ARCH_SW_64 */
+
 };
 G_STATIC_ASSERT(G_N_ELEMENTS(preferredMachines) == VIR_ARCH_LAST);
 

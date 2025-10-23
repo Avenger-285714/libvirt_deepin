@@ -28,6 +28,7 @@
 #include "cpu_s390.h"
 #include "cpu_arm.h"
 #include "cpu_loongarch.h"
+#include "cpu_sw64.h"
 #include "cpu_riscv64.h"
 #include "capabilities.h"
 
@@ -43,6 +44,7 @@ static struct cpuArchDriver *drivers[] = {
     &cpuDriverArm,
     &cpuDriverRiscv64,
     &cpuDriverLoongArch,
+    &cpuDriverSW64,
 };
 
 

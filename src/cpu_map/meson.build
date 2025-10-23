@@ -85,6 +85,8 @@ cpumap_data = [
   'x86_vendors.xml',
   'x86_Westmere-IBRS.xml',
   'x86_Westmere.xml',
+  'sw64_core3.xml',
+  'sw64_core4.xml',
 ]
 
 install_data(cpumap_data, install_dir: pkgdatadir / 'cpu_map')

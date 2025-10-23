@@ -4206,6 +4206,10 @@ qemuDomainDefAddDefaultDevices(virQEMUDriver *driver,
             addPCIRoot = true;
         break;
 
+    case VIR_ARCH_SW_64:
+        addPCIeRoot = true;
+        break;
+
     case VIR_ARCH_ARMV6L:
     case VIR_ARCH_ARMV7L:
     case VIR_ARCH_ARMV7B:
@@ -6068,7 +6072,8 @@ qemuDomainDefaultVideoDevice(const virDomainDef *def,
     if (qemuDomainIsARMVirt(def) ||
         qemuDomainIsLoongArchVirt(def) ||
         qemuDomainIsRISCVVirt(def) ||
-        ARCH_IS_S390(def->os.arch)) {
+        ARCH_IS_S390(def->os.arch) ||
+        ARCH_IS_SW64(def->os.arch)) {
         return VIR_DOMAIN_VIDEO_TYPE_VIRTIO;
     }
     if (virQEMUCapsGet(qemuCaps, QEMU_CAPS_DEVICE_CIRRUS_VGA))
@@ -9200,6 +9205,19 @@ qemuDomainMachineIsXenFV(const char *machine,
     return false;
 }
 
+static bool
+qemuDomainMachineIsSW64(const char *machine,
+                        const virArch arch)
+{
+    if (!ARCH_IS_SW64(arch))
+        return false;
+
+    if (STRPREFIX(machine, "core"))
+        return true;
+
+    return false;
+}
+
 
 /* You should normally avoid this function and use
  * qemuDomainHasBuiltinIDE() instead. */
@@ -9210,7 +9228,8 @@ qemuDomainMachineHasBuiltinIDE(const char *machine,
     return qemuDomainMachineIsI440FX(machine, arch) ||
         STREQ(machine, "malta") ||
         STREQ(machine, "sun4u") ||
-        STREQ(machine, "g3beige");
+        STREQ(machine, "g3beige") ||
+	STRPREFIX(machine, "core");
 }
 
 
@@ -9290,6 +9309,13 @@ bool
 qemuDomainIsXenFV(const virDomainDef *def)
 {
     return qemuDomainMachineIsXenFV(def->os.machine, def->os.arch);
+}
+
+
+bool
+qemuDomainIsSW64(const virDomainDef *def)
+{
+    return qemuDomainMachineIsSW64(def->os.machine, def->os.arch);
 }
 
 

@@ -577,6 +577,8 @@ virHostCPUParseFrequency(FILE *cpuinfo,
         prefix = "cpu MHz dynamic";
     else if (ARCH_IS_LOONGARCH(arch))
         prefix = "CPU MHz";
+    else if (ARCH_IS_SW64(arch))
+        prefix = "cpu frequency [MHz]";
 
     if (!prefix) {
         VIR_WARN("%s is not supported by the %s parser",

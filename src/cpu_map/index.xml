@@ -120,4 +120,10 @@
     <include filename='arm_FT-2000plus.xml'/>
     <include filename='arm_Tengyun-S2500.xml'/>
   </arch>
+
+  <arch name='sw_64'>
+    <!-- SW64-based CPU models -->
+    <include filename='sw64_core3.xml'/>
+    <include filename='sw64_core4.xml'/>
+  </arch>
 </cpus>
