@@ -836,6 +836,9 @@ int qemuMonitorGetSEVCapabilities(qemuMonitor *mon,
 int qemuMonitorGetSGXCapabilities(qemuMonitor *mon,
                                   virSGXCapability **capabilities);
 
+int qemuMonitorGetCCACapabilities(qemuMonitor *mon,
+                                  virCCACapability **capabilities);
+
 typedef enum {
   QEMU_MONITOR_MIGRATE_RESUME           = 1 << 0, /* resume failed post-copy migration */
   QEMU_MONITOR_MIGRATION_FLAGS_LAST
