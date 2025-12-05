@@ -1,3 +1,9 @@
+libvirt (10.7.0-3deepin4) unstable; urgency=medium
+
+  * feat: Add support for ARM-CCA confidential computing features
+
+ -- WangYuli <wangyuli@aosc.io>  Fri, 05 Dec 2025 14:15:35 +0800
+
 libvirt (10.7.0-3deepin3) unstable; urgency=medium
 
   * feat: add sw64 support
