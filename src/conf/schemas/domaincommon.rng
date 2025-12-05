@@ -523,6 +523,9 @@
             <value>s390-pv</value>
           </attribute>
         </group>
+        <group>
+          <ref name="launchSecurityCCA"/>
+        </group>
       </choice>
     </element>
   </define>
@@ -613,6 +616,29 @@
       </optional>
       <optional>
         <element name="hostData">
+          <data type="string"/>
+        </element>
+      </optional>
+    </interleave>
+  </define>
+
+  <define name="launchSecurityCCA">
+    <attribute name="type">
+      <value>cca</value>
+    </attribute>
+    <interleave>
+      <optional>
+        <attribute name="measurement-log">
+          <ref name="virYesNo"/>
+        </attribute>
+      </optional>
+      <optional>
+        <element name="measurement-algo">
+          <data type="string"/>
+        </element>
+      </optional>
+      <optional>
+        <element name="personalization-value">
           <data type="string"/>
         </element>
       </optional>
