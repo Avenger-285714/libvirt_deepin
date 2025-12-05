@@ -715,6 +715,9 @@ VIR_ENUM_IMPL(virQEMUCaps,
               "acpi-erst", /* QEMU_CAPS_DEVICE_ACPI_ERST */
               "intel-iommu.dma-translation", /* QEMU_CAPS_INTEL_IOMMU_DMA_TRANSLATION */
               "machine-i8042-opt", /* QEMU_CAPS_MACHINE_I8042_OPT */
+
+              /* 465 */
+              "rme-guest", /* QEMU_CAPS_CCA_GUEST */
     );
 
 
@@ -799,6 +802,8 @@ struct _virQEMUCaps {
     virSEVCapability *sevCapabilities;
 
     virSGXCapability *sgxCapabilities;
+
+    virCCACapability *ccaCapabilities;
 
     virDomainCapsFeatureHyperv *hypervCapabilities;
 
@@ -1406,6 +1411,7 @@ struct virQEMUCapsStringFlags virQEMUCapsObjectTypes[] = {
     { "virtio-sound-device", QEMU_CAPS_DEVICE_VIRTIO_SOUND },
     { "sev-snp-guest", QEMU_CAPS_SEV_SNP_GUEST },
     { "acpi-erst", QEMU_CAPS_DEVICE_ACPI_ERST },
+    { "rme-guest", QEMU_CAPS_CCA_GUEST },
 };
 
 

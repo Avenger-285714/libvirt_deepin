@@ -2870,6 +2870,7 @@ typedef enum {
     VIR_DOMAIN_LAUNCH_SECURITY_SEV,
     VIR_DOMAIN_LAUNCH_SECURITY_SEV_SNP,
     VIR_DOMAIN_LAUNCH_SECURITY_PV,
+    VIR_DOMAIN_LAUNCH_SECURITY_CCA,
 
     VIR_DOMAIN_LAUNCH_SECURITY_LAST,
 } virDomainLaunchSecurity;
@@ -2907,11 +2908,19 @@ struct _virDomainSEVSNPDef {
 };
 
 
+struct _virDomainCCADef {
+    char *measurement_algo;
+    char *personalization_value;
+    virTristateBool measurement_log;
+};
+
+
 struct _virDomainSecDef {
     virDomainLaunchSecurity sectype;
     union {
         virDomainSEVDef sev;
         virDomainSEVSNPDef sev_snp;
+        virDomainCCADef cca;
     } data;
 };
 
